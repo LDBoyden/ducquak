@@ -3,7 +3,8 @@
     <nav>
         <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">HOME</a></li>
-            <li role="presentation"><a href="#">Sign IN</a></li>
+            <li role="presentation"><a href="#">Sign IN</a></li> 
+            <li role="presentation"><a href="registerNew.jsp">Register</a></li>
             <li role="presentation"><a href="#">Log OUT</a></li>
             <li role="presentation"><a href="#">My Threads</a></li>
         </ul>

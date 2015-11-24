@@ -7,13 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <jsp:include page="/headerFooter/headTop.jsp" />
+    <jsp:include page="/headerFooter/headBottom.jsp" />
     <body>
-        <h1>Hello World!</h1>
-        <article>
+        <div class="container">
+        
+        <jsp:include page="/headerFooter/header.jsp"/>
+        
             <form method="POST" action="Register">
                 <ul>
                     <li> User Name <input type="text" name="username"></li>
@@ -22,6 +22,8 @@
                 </ul>
                 <input type="submit" value="Register"> 
             </form>
-        </article>
+        
+        </div>
     </body>
+     <jsp:include page="/headerFooter/footer.jsp" />
 </html>
