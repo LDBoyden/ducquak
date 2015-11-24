@@ -8,3 +8,23 @@ and open the template in the editor.
     Author     : arturpopov
 */
 
+body {
+    background-color: #ffff66;
+}
+.container{
+    background-color: #ffffff;
+    min-height: 1000px;
+}
+
+.margin-bottom{
+    margin-bottom: 50px;
+    
+}
+
+.margin-left{
+    margin-left: 20px;
+}
+
+.margin-right{
+    margin-right: 20px;
+}

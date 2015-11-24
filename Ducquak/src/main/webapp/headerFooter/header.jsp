@@ -1,5 +1,5 @@
-<div class="header">
-    <h3 class="text-muted">Duc Quak!</h3>
+<div class="row header margin-bottom">
+    <h3 >Duc Quak!</h3>
     <nav>
         <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">HOME</a></li>
