@@ -4,5 +4,5 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="/Duc_Quak/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="/Ducquak/Styles.css" />
         <title>Duc Quak</title>
