@@ -16,7 +16,8 @@ public final class keyspacesDQ {
      try {
         String createKeySpace = "create keyspace if not exists ducQuak  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
         String createanonymousUsers = "CREATE TABLE if not exists ducQuak.users ("
-                + "userID uuid, "
+                + "userID uuid,"
+                + "userName text,"
                 + "points int,"
                 + "password text,"
                 + "threads list,"
