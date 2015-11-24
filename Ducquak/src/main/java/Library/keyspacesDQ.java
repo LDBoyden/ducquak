@@ -4,22 +4,15 @@
  * and open the template in the editor.
  */
 package Library;
-
 import com.datastax.driver.core.*;
 /**
  *
  * @author NSERW
  */
-public class KeyspacesDQ {
-    
-    public KeyspacesDQ()
+public final class keyspacesDQ {
+    public void createDBC(Cluster c)
     {
-        
-    }
-    
-    public static void setUpKeyspace(Cluster c)
-    {
-        try{
+     try {
         String createKeySpace = "create keyspace if not exists ducQuak  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
         String createanonymousUsers = "CREATE TABLE if not exists ducQuak.users ("
                 + "userID uuid, "
@@ -51,14 +44,10 @@ public class KeyspacesDQ {
                 + "postedTime timestamp,"
                 + "PRIMARY KEY(pictureID, postID)";
         Session session = c.connect();
-        try
-        {
-            
-        }
         }
         catch (Exception ex)
         {
             System.out.println("Something like major wrong here!");
         }
-    }
+}
 }
