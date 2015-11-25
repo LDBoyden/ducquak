@@ -14,13 +14,14 @@
     <body>
         <h1>Hello World!</h1>
         <article>
-                <form method="GET" action="userLogin">
+                <form method="POST" action="userLogin">
                     <ul>
                         <li>Username<input type="text" name="username"></li>
                         <li>Password<input type="password" name="password"></li> 
                     </ul>
+                    <input type="submit" value="Login"> 
                 </form>
-            <input type="submit" value="Login"> 
+            
         </article>
     </body>
 </html>

@@ -86,14 +86,14 @@ Cluster cluster=null;
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("password01");
         
-        Convertors convertor = new Convertors();
-        java.util.UUID userID = convertor.getTimeUUID();
+        //Convertors convertor = new Convertors();
+        //java.util.UUID userID = convertor.getTimeUUID();
         
         if(password.equals(confirmPassword))
         {
             userFunctions uF = new userFunctions();
             uF.setCluster(cluster);
-            uF.registerUser(userID, userName, password);
+            uF.registerUser(userName, password);
             
             response.sendRedirect("/registerNew.jsp");
         } else 

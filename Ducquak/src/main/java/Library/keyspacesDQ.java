@@ -16,22 +16,19 @@ public final class keyspacesDQ {
         try {
             String createKeySpace = "create keyspace if not exists ducquak  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
             String createanonymousUsers = "CREATE TABLE if not exists ducquak.users ("
-                    + "userID uuid,"
                     + "userName text,"
                     + "points int,"
                     + "password text,"
                     + "threads text,"
-                    + " PRIMARY KEY (userID)"
+                    + " PRIMARY KEY (userName)"
                     + ")";
-            String loginSecInd = "CREATE INDEX user_index ON instagrim.userprofiles (userName);";
-
             String createThreads = "CREATE TABLE if not exists ducquak.threads ("
                     + "threadID uuid,"
                     + "threadName text,"
                     + "longtitute float,"
                     + "langtitude float,"
                     + "numberOfMembers int,"
-                    + "threadAdmin uuid,"
+                    + "threadAdmin text,"
                     + "description text,"
                     + "maximumMembers int"
                     + "PRIMARY KEY (threadID)"
@@ -51,7 +48,7 @@ public final class keyspacesDQ {
                     + "postedTime timestamp,"
                     + "PRIMARY KEY(pictureID)";
             String userThreads = "CREATE TABLE if not exists ducquak.userThreads ("
-                    + "userID uuid"
+                    + "userName text"
                     + "threadID uuid"
                     + "PRIMARY KEY (userID)";
             Session session = c.connect();
@@ -72,13 +69,7 @@ public final class keyspacesDQ {
             } catch (Exception et) {
                 System.out.println("Can't create following table " + et);
             }
-            try {
-                SimpleStatement cqlQuery = new SimpleStatement(loginSecInd);
-                session.execute(cqlQuery);
-
-            } catch (Exception et) {
-                System.out.println("Can't create Address Profile " + et);
-            }
+            
             System.out.println("" + createanonymousUsers);
             try {
                 SimpleStatement cqlQuery = new SimpleStatement(createThreads);

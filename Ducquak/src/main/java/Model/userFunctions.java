@@ -31,7 +31,7 @@ public class userFunctions {
         this.cluster = cluster;
     }
     
-    public boolean registerUser(UUID userID, String username, String Password)
+    public boolean registerUser(String username, String Password)
     {
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
@@ -42,11 +42,11 @@ public class userFunctions {
             return false;
         }
         Session s = cluster.connect("ducquak");
-        PreparedStatement pS = s.prepare("INSERT INTO users (userID,userName,password) Values (?,?,?)");
+        PreparedStatement pS = s.prepare("INSERT INTO users (userName,password) Values (?,?)");
         BoundStatement boundStatement = new BoundStatement(pS);
         s.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        userID,username,EncodedPassword));
+                        username,EncodedPassword));
         //We are assuming this always works.  Also a transaction would be good here !
         
         return true;
@@ -77,7 +77,7 @@ public class userFunctions {
         } else {
             for (Row row : rs) {
                
-                String userName = row.getString("login");
+                String userName = row.getString("userName");
                 if(userName.equals(username))
                 {
                     String StoredPass = row.getString("password");

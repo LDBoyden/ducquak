@@ -11,6 +11,7 @@ import Stores.userLogin;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -69,24 +70,7 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
         
-        userFunctions uF = new userFunctions();
-        uF.setCluster(cluster);
-        boolean loginValid = uF.validateUser(username, password);
-        HttpSession session=request.getSession();
-        
-        if(loginValid)
-        {
-            userLogin uL = new userLogin();
-            uL.setLogIn();
-            uL.setUserName(username);
-            uL.setUUID(uF.getUserID(uF, username));
-            session.setAttribute("LoggedIn", uL);
-            
-            
-        }
         
     }
 
@@ -101,7 +85,29 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        userFunctions uF = new userFunctions();
+        uF.setCluster(cluster);
+        boolean loginValid = uF.validateUser(username, password);
+        HttpSession session=request.getSession();
+        
+        if(loginValid)
+        {
+            userLogin uL = new userLogin();
+            uL.setLogIn();
+            uL.setUserName(username);
+            //uL.setUUID(uF.getUserID(uF, username));
+            session.setAttribute("LoggedIn", uL);
+            System.out.println("Username is = " + username);
+            //System.out.println("UserID is = " + uL.getUUID());
+            RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
+            rd.forward(request,response);
+        }
+        else {
+            response.sendRedirect("/ducquak/userLogin.jsp");
+        }
     }
 
     /**

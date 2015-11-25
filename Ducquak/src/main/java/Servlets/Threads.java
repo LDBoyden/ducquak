@@ -56,8 +56,8 @@ public class Threads extends HttpServlet {
         String maxmembers = request.getParameter("maxmembers");
         int maxMemberInt = 0;
         HttpSession session = request.getSession();
-        userLogin lg = (userLogin) session.getAttribute("loggedUser");
-        java.util.UUID userUUID = lg.getUUID();
+        userLogin lg = (userLogin) session.getAttribute("LoggedIn");
+        String userUUID = lg.getUserName();
         if (!(maxmembers.compareTo("") == 0 || maxmembers.compareTo("0") == 0)) {
 
             maxMemberInt = Integer.parseInt(maxmembers);

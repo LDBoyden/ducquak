@@ -15,7 +15,7 @@ public class userLogin {
     
     String username = null;
     Boolean loggedIn = false;
-    java.util.UUID userID = null;
+    
     
     public userLogin()
     {
@@ -51,13 +51,5 @@ public class userLogin {
         this.loggedIn=logedin;
     }
     
-    public void setUUID(UUID userID)
-    {
-        this.userID = userID;
-    }
     
-    public UUID getUUID()
-    {
-        return userID;
-    }
 }
