@@ -15,10 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Library.CassandraHosts;
 import Library.Convertors;
+import Stores.userLogin;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author arturpopov
@@ -26,14 +29,15 @@ import com.datastax.driver.core.Session;
 @WebServlet(name = "Threads", urlPatterns = {"/Threads"})
 public class Threads extends HttpServlet {
 
-        private Cluster cluster;
+    private Cluster cluster;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        }
+
+    }
+
     @Override
-public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) throws ServletException {
 
         cluster = CassandraHosts.getCluster();
     }
@@ -41,9 +45,8 @@ public void init(ServletConfig config) throws ServletException {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-    }
 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,20 +54,29 @@ public void init(ServletConfig config) throws ServletException {
         String threadName = request.getParameter("threadname");
         String description = request.getParameter("description");
         String maxmembers = request.getParameter("maxmembers");
-        if(maxmembers.compareTo("") == 0 || maxmembers.compareTo("0") == 0)
-        {
-            maxmembers = null;
+        int maxMemberInt = 0;
+        HttpSession session = request.getSession();
+        userLogin lg = (userLogin) session.getAttribute("loggedUser");
+        java.util.UUID userUUID = lg.getUUID();
+        if (!(maxmembers.compareTo("") == 0 || maxmembers.compareTo("0") == 0)) {
+
+            maxMemberInt = Integer.parseInt(maxmembers);
         }
+
         Session s = cluster.connect("ducquak");
         Convertors convertor = new Convertors();
-        java.util.UUID userID = convertor.getTimeUUID();
-        PreparedStatement pS = s.prepare("INSERT INTO threads () Values (?,?,?)");
+        java.util.UUID threadUUID = convertor.getTimeUUID();
+        PreparedStatement pS = s.prepare("INSERT INTO threads (threadUUID, threadName, 10, 101, 1, userUUID, description, maxmembers) Values (?,?,?,?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement(pS);
         s.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        userID,username,Password));
+                        threadUUID, threadName, 10, 101, 1, userUUID, description, maxMemberInt));
+        pS = s.prepare("INSERT INTO userThreads(userUUID, threadUUID) Values (?,?)");
+        boundStatement = new BoundStatement(pS);
+        s.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        userUUID, threadUUID));
     }
-
 
     @Override
     public String getServletInfo() {
