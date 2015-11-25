@@ -24,6 +24,7 @@ public final class keyspacesDQ {
                 + " PRIMARY KEY (userID)"
                 + ")";
         String loginSecInd = "CREATE INDEX user_index ON instagrim.userprofiles (userName);";
+        
         String createThreads = "CREATE TABLE if not exists ducquak.threads ("
                 + "threadID uuid,"
                 + "threadName text,"
@@ -49,6 +50,7 @@ public final class keyspacesDQ {
                 + "pictureID uuid,"
                 + "postedTime timestamp,"
                 + "PRIMARY KEY(pictureID)";
+        String userThreads;
         Session session = c.connect();
         try {
                 PreparedStatement statement = session

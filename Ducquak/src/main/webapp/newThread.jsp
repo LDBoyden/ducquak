@@ -22,13 +22,13 @@
 
             </div>
             <div class="row margin-bottom">
-                <form method="POST" action="registerUser">
+                <form method="POST" action="Threads">
                     <ul>
-                        <li> User Name <input type="text" name="username"></li>
-                        <li>Password  <input type="password" name="password"></li>
-                        <li>Confirm Password <input type="password" name="password01"></li>
+                        <li>Thread Name* <input type="text" name="threadname"></li>
+                        <li>Description <input type="text" name="description"></li>
+                        <li>Maximum Members<input type="text" name="maxmembers"></li>
                     </ul>
-                    <input type="submit" value="Register"> 
+                    <input type="submit" value="Threads"> 
                 </form>
             </div>
         </div>
