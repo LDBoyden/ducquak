@@ -30,7 +30,7 @@ public final class keyspacesDQ {
                     + "numberOfMembers int,"
                     + "threadAdmin text,"
                     + "description text,"
-                    + "maximumMembers int"
+                    + "maximumMembers int,"
                     + "PRIMARY KEY (threadID)"
                     + ")";
             String createPostsTable = "CREATE TABLE if not exists ducquak.posts ("
@@ -40,17 +40,20 @@ public final class keyspacesDQ {
                     + "postedTime timestamp,"
                     + "votedNumber int,"
                     + "picture boolean,"
-                    + "PRIMARY KEY (postID)";
+                    + "PRIMARY KEY (postID)"
+                    + ")";
             String createPostPics = "CREATE TABLE if not exists ducquak.picsList ("
                     + "postID uuid,"
                     + "picture blob,"
                     + "pictureID uuid,"
                     + "postedTime timestamp,"
-                    + "PRIMARY KEY(pictureID)";
+                    + "PRIMARY KEY(pictureID)"
+                    + ")";
             String userThreads = "CREATE TABLE if not exists ducquak.userThreads ("
-                    + "userName text"
-                    + "threadID uuid"
-                    + "PRIMARY KEY (userID)";
+                    + "userName text,"
+                    + "threadID uuid,"
+                    + "PRIMARY KEY (userName)"
+                    + ")";
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -92,7 +95,7 @@ public final class keyspacesDQ {
                 System.out.println("Cant create posts pics");
             }
             System.out.println("" + createPostPics);
-            session.close();
+            
             try {
                 SimpleStatement cqlQuery = new SimpleStatement(userThreads);
                 session.execute(cqlQuery);
@@ -101,6 +104,7 @@ public final class keyspacesDQ {
                 System.out.println("Can't create User Threads " + et);
             }
             System.out.println("" + userThreads);
+            session.close();
         } catch (Exception ex) {
             System.out.println("Something like major wrong here!");
         }
