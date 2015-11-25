@@ -1,1 +1,5 @@
+Library\CassandraHosts.class
+Servlets\registerUser.class
 Library\keyspacesDQ.class
+Library\Convertors.class
+Model\userFunctions.class

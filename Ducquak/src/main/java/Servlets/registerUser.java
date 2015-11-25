@@ -5,8 +5,13 @@
  */
 package Servlets;
 
+import Library.CassandraHosts;
+import Library.Convertors;
+import Model.userFunctions;
+import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "registerUser", urlPatterns = {"/registerUser"})
 public class registerUser extends HttpServlet {
-
+Cluster cluster=null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -60,6 +65,11 @@ public class registerUser extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+    
+    public void init(ServletConfig config) throws ServletException {
+        // TODO Auto-generated method stub
+        cluster = CassandraHosts.getCluster();
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -77,7 +87,17 @@ public class registerUser extends HttpServlet {
         String confirmPassword = request.getParameter("password01");
         
         Convertors convertor = new Convertors();
-        java.util.UUID picid = convertor.getTimeUUID();
+        java.util.UUID userID = convertor.getTimeUUID();
+        
+        if(password.equals(confirmPassword))
+        {
+            userFunctions uF = new userFunctions();
+            uF.setCluster(cluster);
+            uF.registerUser(userID, userName, password);
+        } else 
+        {
+            
+        }
     }
 
     /**

@@ -11,35 +11,35 @@ public final class keyspacesDQ {
         
     }
     
-    public void createDBC(Cluster c)
+    public static void createDBC(Cluster c)
     {
      try {
-        String createKeySpace = "create keyspace if not exists ducQuak  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
-        String createanonymousUsers = "CREATE TABLE if not exists ducQuak.users ("
+        String createKeySpace = "create keyspace if not exists ducquak  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
+        String createanonymousUsers = "CREATE TABLE if not exists ducquak.users ("
                 + "userID uuid,"
                 + "userName text,"
                 + "points int,"
                 + "password text,"
-                + "threads list,"
+                + "threads text,"
                 + " PRIMARY KEY (userID)"
                 + ")";
-        String createThreads = "CREATE TABLE if not exists ducQuak.threads ("
+        String createThreads = "CREATE TABLE if not exists ducquak.threads ("
                 + "threadID uuid,"
                 + "threadName text,"
-                + "votes int,"
-                + "members list,"
+                + "members text,"
                 + "numberOfMembers int,"
+                + "threadAdmin uuid,"
                 + "PRIMARY KEY (threadID)"
                 + ")";
-        String createPostsTable = "CREATE TABLE if not exists ducQuaks.posts ("
+        String createPostsTable = "CREATE TABLE if not exists ducquak.posts ("
                 + "threadID uuid,"
                 + "postID uuid,"
                 + "userID uuid,"
                 + "postedTime timestamp,"
-                + "votedNumber int"
-                + "boolean picture"
+                + "votedNumber int,"
+                + "boolean picture,"
                 + "PRIMARY KEY (postID)";
-        String createPostPics = "CREATE TABLE if not exists ducQuaks.picsList ("
+        String createPostPics = "CREATE TABLE if not exists ducquak.picsList ("
                 + "postID uuid,"
                 + "picture blob,"
                 + "pictureID uuid,"
