@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home
-    Created on : 25-Nov-2015, 12:40:34
+    Document   : newThread
+    Created on : 25-Nov-2015, 13:12:47
     Author     : arturpopov
 --%>
 
@@ -17,17 +17,19 @@
 
             <div class="row margin-bottom">
                 <div class="col-xs-12 center-block">
-                    <h2 >Home Feed</h2>
+                    <h2 >Create a New Thread</h2>
                 </div>
 
             </div>
             <div class="row margin-bottom">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default center-block" aria-label="Create New Thread" onclick="location.href = 'newThread.jsp';">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true">  Create New Thread</span>
-                         
-                    </button>
-                </div>
+                <form method="POST" action="registerUser">
+                    <ul>
+                        <li> User Name <input type="text" name="username"></li>
+                        <li>Password  <input type="password" name="password"></li>
+                        <li>Confirm Password <input type="password" name="password01"></li>
+                    </ul>
+                    <input type="submit" value="Register"> 
+                </form>
             </div>
         </div>
     </body>
