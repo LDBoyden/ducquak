@@ -66,11 +66,11 @@ public class Threads extends HttpServlet {
         Session s = cluster.connect("ducquak");
         Convertors convertor = new Convertors();
         java.util.UUID threadUUID = convertor.getTimeUUID();
-        PreparedStatement pS = s.prepare("INSERT INTO threads (threadUUID, threadName, 10, 101, 1, userUUID, description, maxmembers) Values (?,?,?,?,?,?,?)");
+        PreparedStatement pS = s.prepare("INSERT INTO threads (threadID, threadName, threadAdmin, description, maxmembers) Values (?,?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement(pS);
         s.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        threadUUID, threadName, 10, 101, 1, userUUID, description, maxMemberInt));
+                        threadUUID, threadName, userUUID, description, maxMemberInt));
         pS = s.prepare("INSERT INTO userThreads(userUUID, threadUUID) Values (?,?)");
         boundStatement = new BoundStatement(pS);
         s.execute( // this is where the query is executed
