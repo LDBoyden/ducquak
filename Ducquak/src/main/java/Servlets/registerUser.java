@@ -94,8 +94,14 @@ Cluster cluster=null;
             userFunctions uF = new userFunctions();
             uF.setCluster(cluster);
             uF.registerUser(userID, userName, password);
+            
+            response.sendRedirect("/registerNew.jsp");
         } else 
         {
+            String message = "Passwords do not match!";
+            request.setAttribute("message",message);
+            request.getRequestDispatcher("/registerNew.jsp").forward(request, response);
+            response.sendRedirect("/registerNew.jsp");
             
         }
     }

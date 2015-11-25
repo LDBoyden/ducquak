@@ -15,6 +15,7 @@
         <jsp:include page="/headerFooter/header.jsp"/>
         
             <form method="POST" action="registerUser">
+                <p> ${message}</p>
                 <ul>
                     <li> User Name <input type="text" name="username"></li>
                     <li>Password  <input type="password" name="password"></li>

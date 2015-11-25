@@ -23,12 +23,16 @@ public final class keyspacesDQ {
                 + "threads text,"
                 + " PRIMARY KEY (userID)"
                 + ")";
+        String loginSecInd = "CREATE INDEX user_index ON instagrim.userprofiles (userName);";
         String createThreads = "CREATE TABLE if not exists ducquak.threads ("
                 + "threadID uuid,"
                 + "threadName text,"
                 + "members text,"
+                + "longtitute float,"
+                + "langtitude float,"
                 + "numberOfMembers int,"
                 + "threadAdmin uuid,"
+                + "description text,"
                 + "PRIMARY KEY (threadID)"
                 + ")";
         String createPostsTable = "CREATE TABLE if not exists ducquak.posts ("
@@ -37,14 +41,14 @@ public final class keyspacesDQ {
                 + "userID uuid,"
                 + "postedTime timestamp,"
                 + "votedNumber int,"
-                + "boolean picture,"
+                + "picture boolean,"
                 + "PRIMARY KEY (postID)";
         String createPostPics = "CREATE TABLE if not exists ducquak.picsList ("
                 + "postID uuid,"
                 + "picture blob,"
                 + "pictureID uuid,"
                 + "postedTime timestamp,"
-                + "PRIMARY KEY(pictureID, postID)";
+                + "PRIMARY KEY(pictureID)";
         Session session = c.connect();
         try {
                 PreparedStatement statement = session
@@ -62,6 +66,13 @@ public final class keyspacesDQ {
                 session.execute(cqlQuery);
             } catch (Exception et) {
                 System.out.println("Can't create following table " + et);
+            }
+        try{
+                SimpleStatement cqlQuery = new SimpleStatement(loginSecInd);
+                session.execute(cqlQuery);
+            
+            }catch(Exception et){
+                 System.out.println("Can't create Address Profile " + et);
             }
             System.out.println("" + createanonymousUsers);
         try 
