@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author arturpopov
  */
 @WebServlet(name = "Threads", urlPatterns = {"/Threads"})
-public class Threads extends HttpServlet {
+public class CreateThread extends HttpServlet {
 
     private Cluster cluster;
 
