@@ -4,6 +4,6 @@ Servlets\registerUser.class
 Servlets\login.class
 Library\keyspacesDQ.class
 Library\Convertors.class
-Servlets\Threads.class
 Library\AeSimpleSHA1.class
+Servlets\CreateThread.class
 Model\userFunctions.class

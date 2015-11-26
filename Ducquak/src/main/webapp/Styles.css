@@ -28,3 +28,7 @@ body {
 .margin-right{
     margin-right: 20px;
 }
+
+li.hidden {
+    visibility: hidden;
+}
