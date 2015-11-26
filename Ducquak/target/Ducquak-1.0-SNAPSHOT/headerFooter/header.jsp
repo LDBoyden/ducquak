@@ -16,6 +16,7 @@
                         }    else{
             %>
             <li role="presentation"><a href="Logout">Log OUT</a></li>
+             <li role="presentation"><a href="editpassword.jsp">Edit Password</a></li>
             <li role="presentation"><a href="#">My Threads</a></li>
             
             <%
