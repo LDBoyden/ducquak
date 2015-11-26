@@ -32,8 +32,8 @@
                 <div class="col-sm-4 col-sm-offset-4">                   
                     <input type="text" name="username" class="form-control" placeholder="username" required autofocus>              
                     <input type="password" name="password" class="form-control" placeholder="password" required autofocus> 
-                    <input type ="text" name="uLong" id="longsub" class="hidden"  required autofocus/>
-                    <input type ="text" name="uLat" id="latsub" class="hidden" required autofocus />
+                    <input type ="text" name="uLong" id="longsub" class="hidden"  />
+                    <input type ="text" name="uLat" id="latsub" class="hidden" />
                 </div>
                 <div class="col-sm-4">
                 </div>
