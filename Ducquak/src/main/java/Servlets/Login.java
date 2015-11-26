@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author NSERW
  */
-@WebServlet(name = "userLogin", urlPatterns = {"/userLogin"})
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
    Cluster cluster = null;
    

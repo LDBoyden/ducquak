@@ -1,3 +1,4 @@
+<%@page import="Stores.LoggedInfo"%>
 <div class="row header margin-bottom">
     <h3 >Duc Quak!</h3>
 

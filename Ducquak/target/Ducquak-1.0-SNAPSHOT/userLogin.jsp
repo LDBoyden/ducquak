@@ -16,7 +16,7 @@
             <jsp:include page="/headerFooter/header.jsp"/>
 
             <div class="row">
-                <form name="loginform" method="POST" action="userLogin">
+                <form name="loginform" method="POST" action="Login">
                     <ul>
                         <li>Username<input type="text" name="username"></li>
                         <li>Password<input type="password" name="password"></li>
@@ -26,8 +26,8 @@
                     <input type="submit" value="Login"> 
                 </form>
             </div>
-
+        </div>
     </body>
     <jsp:include page="/headerFooter/footer.jsp" />
-</div>
+
 </html>
