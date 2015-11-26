@@ -104,6 +104,9 @@ public class login extends HttpServlet {
             //uL.setUUID(uF.getUserID(uF, username));
             session.setAttribute("LoggedIn", uL);
             System.out.println("Username is = " + username);
+            System.out.println("Lat is = " + ulat);
+            System.out.println("Long is = " + ulong);
+
             //System.out.println("UserID is = " + uL.getUUID());
             RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
             rd.forward(request,response);
