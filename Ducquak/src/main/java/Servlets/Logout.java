@@ -61,7 +61,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session=request.getSession();  
         session.setAttribute("LoggedIn", null);
-        response.sendRedirect("/Instagrim");
+        response.sendRedirect("/home");
     }
 
     /**
