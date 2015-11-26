@@ -15,7 +15,7 @@
             <%
                         }    else{
             %>
-            <li role="presentation"><a href="#">Log OUT</a></li>
+            <li role="presentation"><a href="Logout.java">Log OUT</a></li>
             <li role="presentation"><a href="#">My Threads</a></li>
             
             <%
