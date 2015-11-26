@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author NSERW
  */
 @WebServlet(name = "Editpassword", urlPatterns = {"/Editpassword"})
-public class Editpasswordpage extends HttpServlet {
+public class EditPassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

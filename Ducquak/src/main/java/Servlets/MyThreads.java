@@ -10,6 +10,8 @@ import Stores.LoggedInfo;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -58,12 +60,23 @@ public class MyThreads extends HttpServlet {
         String username = lg.getUserName();
         
        Session cluster_session = cluster.connect("ducquak");
-        PreparedStatement ps = cluster_session.prepare("SELECT * FROM ducquak.userthreads");
-
+        PreparedStatement ps = cluster_session.prepare("SELECT * FROM ducquak.userthreads WHERE userName = ?");
+        
         BoundStatement boundStatement = new BoundStatement(ps);
-        session.execute( // this is where the query is executed
+          ResultSet rs = cluster_session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        username, EncodedPassword, firstName, lastName, encodedEmail, addresses));
+                        username));
+          
+           if (rs.isExhausted()) {
+                System.out.println("No Thread returned");
+                return;
+            } else {
+                for (Row row : rs) {
+                    String thread = row.getString("threadID");
+                    System.out.println(thread);
+                }
+
+                }
         //We are assuming this always works.  Also a transaction would be good here !
     }
 
