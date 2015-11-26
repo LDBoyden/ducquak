@@ -95,7 +95,7 @@ Cluster cluster=null;
             uF.setCluster(cluster);
             uF.registerUser(userName, password);
             
-            response.sendRedirect("/registerNew.jsp");
+            response.sendRedirect("/Ducquak");
         } else 
         {
             String message = "Passwords do not match!";
