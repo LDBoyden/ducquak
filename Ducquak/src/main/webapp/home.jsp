@@ -3,7 +3,7 @@
     Created on : 25-Nov-2015, 12:40:34
     Author     : arturpopov
 --%>
-
+<%@page import="Stores.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

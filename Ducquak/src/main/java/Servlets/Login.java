@@ -7,7 +7,7 @@ package Servlets;
 
 import Library.CassandraHosts;
 import Model.userFunctions;
-import Stores.userLogin;
+import Stores.LoggedInfo;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author NSERW
  */
 @WebServlet(name = "userLogin", urlPatterns = {"/userLogin"})
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
    Cluster cluster = null;
    
    public void init(ServletConfig config) throws ServletException {
@@ -97,7 +97,7 @@ public class login extends HttpServlet {
         
         if(loginValid)
         {
-            userLogin uL = new userLogin();
+            LoggedInfo uL = new LoggedInfo();
             uL.setLogIn();
             uL.setUserName(username);
             uL.setCoords(ulat,ulong);

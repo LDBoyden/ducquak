@@ -6,7 +6,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Library.CassandraHosts;
 import Library.Convertors;
-import Stores.userLogin;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
-
+import Stores.LoggedInfo;
 /**
  *
  * @author arturpopov
@@ -57,7 +55,7 @@ public class CreateThread extends HttpServlet {
         String maxmembers = request.getParameter("maxmembers");
         int maxMemberInt = 0;
         HttpSession session = request.getSession();
-        userLogin lg = (userLogin) session.getAttribute("LoggedIn");
+       LoggedInfo lg = (LoggedInfo) session.getAttribute("LoggedIn");
         String userUUID = lg.getUserName();
         if (!(maxmembers.compareTo("") == 0 || maxmembers.compareTo("0") == 0)) {
 
@@ -65,8 +63,7 @@ public class CreateThread extends HttpServlet {
         }
 
         Session s = cluster.connect("ducquak");
-        Convertors convertor = new Convertors();
-        java.util.UUID threadUUID = convertor.getTimeUUID();
+        java.util.UUID threadUUID = Convertors.getTimeUUID();
         PreparedStatement pS = s.prepare("INSERT INTO threads (threadID, threadName, threadAdmin, description, maximumMembers) Values (?,?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement(pS);
         s.execute( // this is where the query is executed

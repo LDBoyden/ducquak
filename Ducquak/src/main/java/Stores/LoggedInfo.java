@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * @author NSERW
  */
-public class userLogin {
+public class LoggedInfo {
     
     String username = null;
     Boolean loggedIn = false;
@@ -19,7 +19,7 @@ public class userLogin {
     String userlong = null;
     
     
-    public userLogin()
+    public LoggedInfo()
     {
         
     }

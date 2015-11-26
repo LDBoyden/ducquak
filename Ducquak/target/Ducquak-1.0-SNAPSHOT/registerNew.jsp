@@ -4,6 +4,7 @@
     Author     : NSERW
 --%>
 
+<%@page import="Stores.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
