@@ -14,19 +14,36 @@
         <div class="container">
 
             <jsp:include page="/headerFooter/header.jsp"/>
+            <div class="row">
+
+                <div class="col-sm-4 col-sm-offset-4">
+                    <form name="loginform" class="form-signin" method="POST"  action="Login">
+                        <h2 class="form-signin-heading">Login</h2>
+
+                </div>
+                <div class="col-sm-4">
+                </div>
+
+            </div>
+
 
             <div class="row">
-                <form name="loginform" method="POST" action="Login">
-                    <ul>
-                        <li>Username<input type="text" name="username"></li>
-                        <li>Password<input type="password" name="password"></li>
-                        <li class="hidden">Long<input type ="text" name="uLong" id="longsub" /></li>
-                        <li class="hidden">Lat<input type ="text" name="uLat" id="latsub" /></li>
-                    </ul>
-                    <input type="submit" value="Login"> 
-                </form>
+
+                <div class="col-sm-4 col-sm-offset-4">                   
+                    <input type="text" name="username" class="form-control" placeholder="username" required autofocus>              
+                    <input type="password" name="password" class="form-control" placeholder="password" required autofocus> 
+                    <input type ="text" name="uLong" id="longsub" class="hidden"  required autofocus/>
+                    <input type ="text" name="uLat" id="latsub" class="hidden" required autofocus />
+                </div>
+                <div class="col-sm-4">
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button class="btn btn-lg btn-default btn-block" type="submit" value="Login">Sign in</button>
+
+                </div>
+            </div>
     </body>
     <jsp:include page="/headerFooter/footer.jsp" />
 
