@@ -12,6 +12,10 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.Statement;
+import com.datastax.driver.core.querybuilder.QueryBuilder;
+import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
+import static com.datastax.driver.core.querybuilder.QueryBuilder.set;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -90,21 +94,27 @@ public class userFunctions {
         return false;
         }
     
-    public UUID getUserID(userFunctions uF, String username)
+    
+    
+    public void changePassword(String username, String newPassword)
     {
         Session session = cluster.connect("ducquak");
-        PreparedStatement ps = session.prepare("select * from users where userName=?");
-        ResultSet rs = null;
-        BoundStatement boundStatement = new BoundStatement(ps);
-        rs = session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        username ));
-        
-        UUID userID = null;
-        for (Row row : rs) {
-            userID = row.getUUID("userID");
+        Statement s00;
+        s00 = QueryBuilder.select()
+               .all()
+               .from("ducquak","users");
+        ResultSet rs = session.execute(s00);
+        for(Row row : rs)
+        {
+            String olduserName = row.getString("userName");
+            if(olduserName.equals(username))
+            {
+                Statement s01 = QueryBuilder.update("ducquak","users")
+                        .with(set("password", username))
+                        .where(eq("password",olduserName));
+            session.execute(s01);
+            }
         }
-        return userID;
     }
 }
 

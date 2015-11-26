@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import Library.AeSimpleSHA1;
+import Model.userFunctions;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author NSERW
  */
 @WebServlet(name = "Editpassword", urlPatterns = {"/Editpassword"})
-public class Editpassword extends HttpServlet {
+public class Editpasswordpage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +41,7 @@ public class Editpassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Editpassword</title>");            
+            out.println("<title>Servlet Editpassword</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Editpassword at " + request.getContextPath() + "</h1>");
@@ -72,17 +76,39 @@ public class Editpassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmNewPassword = request.getParameter("confirmNewPassword");
+
+        userFunctions uF = new userFunctions();
+        boolean loginCheck = uF.validateUser(username, oldPassword);
+
+        if (loginCheck) {
+            if (newPassword.equals(confirmNewPassword)) {
+                AeSimpleSHA1 sha1handler = new AeSimpleSHA1();
+                String EncodedPassword = null;
+                try {
+                    EncodedPassword = sha1handler.SHA1(newPassword);
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException et) {
+                    System.out.println("Can't check your password");
+                }
+                
+                uF.changePassword(username, EncodedPassword);
+            }
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
