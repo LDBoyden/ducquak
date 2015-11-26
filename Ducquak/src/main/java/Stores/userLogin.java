@@ -15,8 +15,8 @@ public class userLogin {
     
     String username = null;
     Boolean loggedIn = false;
-    float userlat = 0;
-    float userlong = 0;
+    String userlat = null;
+    String userlong = null;
     
     
     public userLogin()
@@ -55,16 +55,16 @@ public class userLogin {
     
     public void setCoords (String ulat, String ulong)
     {
-        this.userlat = Float.parseFloat(ulat);
-        this.userlong = Float.parseFloat(ulong);
+        this.userlat = ulat;
+        this.userlong = ulong;
    }
     
-    public float returnLat()
+    public String returnLat()
     {
         return userlat;
     }
     
-    public float returnLong()
+    public String returnLong()
     {
         return userlong;
     }
