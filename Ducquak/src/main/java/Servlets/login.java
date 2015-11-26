@@ -87,6 +87,8 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String ulong = request.getParameter("uLong");
+        String ulat = request.getParameter("uLat");
         
         userFunctions uF = new userFunctions();
         uF.setCluster(cluster);
@@ -98,6 +100,7 @@ public class login extends HttpServlet {
             userLogin uL = new userLogin();
             uL.setLogIn();
             uL.setUserName(username);
+            uL.setCoords(ulat,ulong);
             //uL.setUUID(uF.getUserID(uF, username));
             session.setAttribute("LoggedIn", uL);
             System.out.println("Username is = " + username);
