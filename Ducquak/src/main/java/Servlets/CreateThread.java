@@ -20,6 +20,7 @@ import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -76,6 +77,9 @@ public class CreateThread extends HttpServlet {
         s.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         userUUID, threadUUID));
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
+        rd.forward(request, response);
     }
 
     @Override
