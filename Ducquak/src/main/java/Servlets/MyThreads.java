@@ -15,6 +15,7 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.io.IOException;
 import java.util.UUID;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,17 +68,22 @@ public class MyThreads extends HttpServlet {
           ResultSet rs = cluster_session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
-          
+          String threads = "";
            if (rs.isExhausted()) {
                 System.out.println("No Thread returned");
                 return;
             } else {
                 for (Row row : rs) {
                     UUID thread = row.getUUID("threadID");
+                    threads += thread;
+                    
                     System.out.println(thread);
                 }
 
                 }
+           request.setAttribute("threads", threads);
+          RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
+            rd.forward(request,response);
         //We are assuming this always works.  Also a transaction would be good here !
     }
 

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="/headerFooter/headTop.jsp" />
+    
     <jsp:include page="/headerFooter/headBottom.jsp" />
     <body>
         <div class="container">
@@ -29,6 +30,7 @@
 
                         </button>
                     </div>
+                    $threads
                 </div>
             </div>
         </div>

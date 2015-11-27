@@ -7,4 +7,3 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="/Ducquak/Styles.css" />
         <title>Duc Quak</title>
-    </head>
