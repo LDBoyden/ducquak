@@ -108,8 +108,8 @@ public class Login extends HttpServlet {
             System.out.println("Long is = " + ulong);
 
             //System.out.println("UserID is = " + uL.getUUID());
-            RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd=request.getRequestDispatcher("myThreads.jsp");
+                rd.forward(request,response);
         }
         else {
             response.sendRedirect("/ducquak/userLogin.jsp");
