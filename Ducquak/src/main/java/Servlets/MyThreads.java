@@ -44,7 +44,6 @@ public class MyThreads extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -57,48 +56,67 @@ public class MyThreads extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession http_session = request.getSession();
+        HttpSession http_session = request.getSession();
         LoggedInfo lg = (LoggedInfo) http_session.getAttribute("LoggedIn");
         String username = lg.getUserName();
-        
-       Session cluster_session = cluster.connect("ducquak");
+
+        Session cluster_session = cluster.connect("ducquak");
         PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE userName = ?");
-        
+
         BoundStatement boundStatement = new BoundStatement(ps);
-          ResultSet rs = cluster_session.execute( // this is where the query is executed
+        ResultSet rs = cluster_session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
-          String threads = "";
-           if (rs.isExhausted()) {
-                System.out.println("No Thread returned");
-                return;
-            } else {
-                for (Row row : rs) {
-                    UUID thread = row.getUUID("threadID");
-                    threads += thread;
-                    
-                    System.out.println(thread);
-                }
 
-                }
-           request.setAttribute("threads", threads);
-          RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
-            rd.forward(request,response);
-        //We are assuming this always works.  Also a transaction would be good here !
+        String threads = "";
+        if (rs.isExhausted()) {
+            System.out.println("No Thread returned");
+            return;
+        } else {
+            for (Row row : rs) {
+                UUID thread = row.getUUID("threadID");
+
+                ps = cluster_session.prepare("SELECT * FROM threads WHERE threadID = ?");
+
+                boundStatement = new BoundStatement(ps);
+                ResultSet userThread = cluster_session.execute( // this is where the query is executed
+                        boundStatement.bind( // here you are binding the 'boundStatement'
+                                thread));
+                Row userThreadRow = rs.one();
+                String threadName = userThreadRow.getString("threadName");
+                float longtitude = userThreadRow.getFloat("longtitude");
+                float langtitude = userThreadRow.getFloat("langtitude");
+                int numberOfMembers = userThreadRow.getInt("numberOfMembers");
+                String description = userThreadRow.getString("description");
+                int maxMembers = userThreadRow.getInt("maximumMembers");
+
+                threads += "Thread Name: " + threadName + "\nCurrent Number of Memebers: " + numberOfMembers + "\nDescription: " + description + "\nMaximum Members Allowed: " + maxMembers+"\n\n";
+
+            }
+
+        }
+        request.setAttribute(
+                "threads", threads);
+        RequestDispatcher rd = request.getRequestDispatcher("myThreads.jsp");
+
+        rd.forward(request, response);
+
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    //We are assuming this always works.  Also a transaction would be good here !
+
+/**
+ * Handles the HTTP <code>POST</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+
     }
 
     /**
@@ -107,7 +125,7 @@ public class MyThreads extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

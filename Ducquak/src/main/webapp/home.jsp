@@ -30,7 +30,6 @@
 
                         </button>
                     </div>
-                    ${threads}
                 </div>
             </div>
         </div>

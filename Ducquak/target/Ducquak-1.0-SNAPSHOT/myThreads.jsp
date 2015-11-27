@@ -18,7 +18,7 @@
 
             <div class="row margin-bottom">
                 <div class="col-xs-12 center-block">
-                    <h2 >Home Feed</h2>
+                    <h2 >My Threads</h2>
                 </div>
 
             </div>
@@ -26,10 +26,11 @@
                 <div class="col-xs-12">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-default center-block" aria-label="Create New Thread" onclick="location.href = 'newThread.jsp';">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true">  Create New Thread</span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true">Threads by You</span>
 
                         </button>
                     </div>
+                    ${threads}
                 </div>
             </div>
         </div>
