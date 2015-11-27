@@ -59,15 +59,16 @@ public class MyThreads extends HttpServlet {
         HttpSession http_session = request.getSession();
         LoggedInfo lg = (LoggedInfo) http_session.getAttribute("LoggedIn");
         String username = lg.getUserName();
+        System.out.println(username);
 
         Session cluster_session = cluster.connect("ducquak");
-        PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE userName = ?");
+        PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE username = ?");
 
         BoundStatement boundStatement = new BoundStatement(ps);
         ResultSet rs = cluster_session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
-
+        System.out.println("dicks dicks " + username);
         String threads = "";
         if (rs.isExhausted()) {
             System.out.println("No Thread returned");
@@ -77,20 +78,20 @@ public class MyThreads extends HttpServlet {
                 UUID thread = row.getUUID("threadID");
 
                 ps = cluster_session.prepare("SELECT * FROM threads WHERE threadID = ?");
-
+                System.out.println("dicks dicks " + thread);
                 boundStatement = new BoundStatement(ps);
                 ResultSet userThread = cluster_session.execute( // this is where the query is executed
                         boundStatement.bind( // here you are binding the 'boundStatement'
                                 thread));
-                Row userThreadRow = rs.one();
+                Row userThreadRow = userThread.one();
                 String threadName = userThreadRow.getString("threadName");
-                float longtitude = userThreadRow.getFloat("longtitude");
-                float langtitude = userThreadRow.getFloat("langtitude");
+               // float longtitude = userThreadRow.getFloat("longtitude");
+              //  float langtitude = userThreadRow.getFloat("langtitude");
                 int numberOfMembers = userThreadRow.getInt("numberOfMembers");
                 String description = userThreadRow.getString("description");
                 int maxMembers = userThreadRow.getInt("maximumMembers");
 
-                threads += "Thread Name: " + threadName + "\nCurrent Number of Memebers: " + numberOfMembers + "\nDescription: " + description + "\nMaximum Members Allowed: " + maxMembers+"\n\n";
+                threads += "Thread Name: " + threadName + "\nCurrent Number of Memebers: " + numberOfMembers + "\nDescription: " + description + "\nMaximum Members Allowed: " + maxMembers + "\n\n";
 
             }
 
@@ -104,17 +105,16 @@ public class MyThreads extends HttpServlet {
     }
 
     //We are assuming this always works.  Also a transaction would be good here !
-
-/**
- * Handles the HTTP <code>POST</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
@@ -125,7 +125,7 @@ public class MyThreads extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
