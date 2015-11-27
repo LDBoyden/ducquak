@@ -62,7 +62,7 @@ public class MyThreads extends HttpServlet {
         System.out.println(username);
 
         Session cluster_session = cluster.connect("ducquak");
-        PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE username = ?");
+        PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE username = ? ALLOW FILTERING");
 
         BoundStatement boundStatement = new BoundStatement(ps);
         ResultSet rs = cluster_session.execute( // this is where the query is executed
@@ -77,7 +77,7 @@ public class MyThreads extends HttpServlet {
             for (Row row : rs) {
                 UUID thread = row.getUUID("threadID");
 
-                ps = cluster_session.prepare("SELECT * FROM threads WHERE threadID = ?");
+                ps = cluster_session.prepare("SELECT * FROM threads WHERE threadID = ? ;");
                 System.out.println("dicks dicks " + thread);
                 boundStatement = new BoundStatement(ps);
                 ResultSet userThread = cluster_session.execute( // this is where the query is executed
