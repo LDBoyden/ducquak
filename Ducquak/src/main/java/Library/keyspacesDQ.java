@@ -49,7 +49,7 @@ public final class keyspacesDQ {
                     + "postedTime timestamp,"
                     + "PRIMARY KEY(pictureID)"
                     + ")";
-            String userThreads = "CREATE TABLE if not exists ducquak.userThreads ("
+            String userThreads = "CREATE TABLE if not exists ducquak.userthreads ("
                     + "userName text,"
                     + "threadID uuid,"
                     + "PRIMARY KEY (threadID, userName)"
