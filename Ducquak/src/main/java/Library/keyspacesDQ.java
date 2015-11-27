@@ -54,6 +54,7 @@ public final class keyspacesDQ {
                     + "threadID uuid,"
                     + "PRIMARY KEY (threadID, userName)"
                     + ")";
+            String userThreadsIndex = "CREATE INDEX threadIndex ON ducquak.usersthreads(threadID);";
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -72,7 +73,7 @@ public final class keyspacesDQ {
             } catch (Exception et) {
                 System.out.println("Can't create following table " + et);
             }
-            
+
             System.out.println("" + createanonymousUsers);
             try {
                 SimpleStatement cqlQuery = new SimpleStatement(createThreads);
@@ -95,7 +96,7 @@ public final class keyspacesDQ {
                 System.out.println("Cant create posts pics");
             }
             System.out.println("" + createPostPics);
-            
+
             try {
                 SimpleStatement cqlQuery = new SimpleStatement(userThreads);
                 session.execute(cqlQuery);
@@ -103,7 +104,14 @@ public final class keyspacesDQ {
             } catch (Exception et) {
                 System.out.println("Can't create User Threads " + et);
             }
-            System.out.println("" + userThreads);
+            try {
+                SimpleStatement cqlQuery = new SimpleStatement(userThreadsIndex);
+                session.execute(cqlQuery);
+
+            } catch (Exception et) {
+                System.out.println("Can't create User Threads Index" + et);
+            }
+            System.out.println("" + userThreadsIndex);
             session.close();
         } catch (Exception ex) {
             System.out.println("Something like major wrong here!");
