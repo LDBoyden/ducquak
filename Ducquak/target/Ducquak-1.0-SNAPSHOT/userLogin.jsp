@@ -10,7 +10,7 @@
 <html>
     <jsp:include page="/headerFooter/headTop.jsp" />
     <jsp:include page="/headerFooter/headBottom.jsp" />
-    <body onLoad="getLocation(loginform)">
+    <body onLoad="getLocation()">
         <div class="container">
 
             <jsp:include page="/headerFooter/header.jsp"/>
