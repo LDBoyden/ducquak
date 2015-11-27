@@ -52,7 +52,7 @@ public final class keyspacesDQ {
             String userThreads = "CREATE TABLE if not exists ducquak.userthreads ("
                     + "userName text,"
                     + "threadID uuid,"
-                    + "PRIMARY KEY (threadID, userName)"
+                    + "PRIMARY KEY (userName)"
                     + ")";
             String userThreadsIndex = "CREATE INDEX threadIndex ON ducquak.usersthreads(threadID);";
             Session session = c.connect();

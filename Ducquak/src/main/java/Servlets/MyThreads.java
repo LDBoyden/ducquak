@@ -14,6 +14,7 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,7 +61,7 @@ public class MyThreads extends HttpServlet {
         String username = lg.getUserName();
         
        Session cluster_session = cluster.connect("ducquak");
-        PreparedStatement ps = cluster_session.prepare("SELECT * FROM ducquak.userthreads WHERE userName = ?");
+        PreparedStatement ps = cluster_session.prepare("SELECT * FROM userthreads WHERE userName = ?");
         
         BoundStatement boundStatement = new BoundStatement(ps);
           ResultSet rs = cluster_session.execute( // this is where the query is executed
@@ -72,7 +73,7 @@ public class MyThreads extends HttpServlet {
                 return;
             } else {
                 for (Row row : rs) {
-                    String thread = row.getString("threadID");
+                    UUID thread = row.getUUID("threadID");
                     System.out.println(thread);
                 }
 
