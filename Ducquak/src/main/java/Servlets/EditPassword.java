@@ -6,11 +6,14 @@
 package Servlets;
 
 import Library.AeSimpleSHA1;
+import Library.CassandraHosts;
 import Model.userFunctions;
+import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +26,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Editpassword", urlPatterns = {"/Editpassword"})
 public class EditPassword extends HttpServlet {
+    Cluster cluster = null;
+   
+   public void init(ServletConfig config) throws ServletException {
+        // TODO Auto-generated method stub
+        cluster = CassandraHosts.getCluster();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

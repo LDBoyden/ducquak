@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form method="POST" action="editPassword">
+        <form method="POST" action="Editpassword">
             <ul>
                 <li> Username <input type="text" name="username"></li>
                 <li> Old password <input type ="password" name="oldPassword"></li>
